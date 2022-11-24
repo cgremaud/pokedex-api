@@ -21,13 +21,15 @@ const getPokemonTypeInfo = async function(name) {
     const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
     const pokemon = await response.json();
     const types = pokemon.types;
-    const result = {
+    let result = {
         name: name, 
         types: []
     };
     let type;
+    let typeResult;
     for (let i = 0; i < types.length; i++) {
-      type = await fetch(types[i].type.url);  
+      typeResult = await fetch(types[0].type.url); 
+      type = await typeResult.json(); 
       console.log(type) 
       result.types.push(type);
     } 
