@@ -28,7 +28,7 @@ const getPokemonTypeInfo = async function(name) {
     let type;
     let typeResult;
     for (let i = 0; i < types.length; i++) {
-      typeResult = await fetch(types[0].type.url); 
+      typeResult = await fetch(types[i].type.url); 
       type = await typeResult.json(); 
       console.log(type) 
       result.types.push(type);
