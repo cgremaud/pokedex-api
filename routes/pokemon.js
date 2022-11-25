@@ -4,7 +4,6 @@ var router = express.Router();
 const getPokemon = async function(name = "ditto") {
     const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
     const pokemon = await response.json();
-    const abilities = pokemon.abilities;
     return pokemon;    
 }
 
