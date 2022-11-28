@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
+//todo break these functions out into a separate module 
 const getPokemon = async function(name = "ditto") {
     const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
     const pokemon = await response.json();
