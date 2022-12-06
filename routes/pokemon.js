@@ -28,6 +28,7 @@ const getAllPokemonInRange = async function(limit = 100, offset= 0) {
         return pokemon;
     } catch(err) {
         console.error(err);
+        return err;
     }
 }
 
@@ -41,6 +42,7 @@ const getPokemonAbilities = async function(name) {
         return result;
     } catch(err) {
         console.error(err);
+        return err;
     }
 }
 
@@ -59,7 +61,7 @@ const getPokemonTypeInfo = async function(name) {
         for (let i = 0; i < types.length; i++) {
             typeResult = await fetch(types[i].type.url); 
             type = await typeResult.json(); 
-            console.log(type) 
+            // console.log(type) 
             result.types.push({
                     name: types[i].type.name,
                     typeInfo: type
@@ -68,6 +70,7 @@ const getPokemonTypeInfo = async function(name) {
         return result;
    } catch(err) {
         console.error(err);
+        return err;
    }
 }
 
@@ -80,7 +83,12 @@ router.get('/findall', async function(req, res, next) {
 })
 
 router.get('/:name', async function(req, res, next) {
-    const pokemon = await getPokemon(req.params.name);
+    // try {
+        const pokemon = await getPokemon(req.params.name);
+    // } catch(err) {
+    //     res.status(500);
+    //     res.send(err);
+    // }
     res.send(pokemon);
 });
 
