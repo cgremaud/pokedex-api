@@ -83,13 +83,14 @@ router.get('/findall', async function(req, res, next) {
 })
 
 router.get('/:name', async function(req, res, next) {
-    // try {
+    try {
         const pokemon = await getPokemon(req.params.name);
-    // } catch(err) {
-    //     res.status(500);
-    //     res.send(err);
-    // }
-    res.send(pokemon);
+        res.send(pokemon);
+    } catch(err) {
+        res.status(500);
+        res.send(err);
+    }
+    
 });
 
 router.get('/abilities/:name', async function(req, res, next) {
