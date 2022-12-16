@@ -12,31 +12,61 @@ const getPokemonTypeInfo = getterFunctions.getPokemonTypeInfo;
 
 
 router.get('/findall', async function(req, res, next) {
-    const limit = req.query.limit;
-    const offset = req.query.offset;
-    const range = await getAllPokemonInRange(limit, offset);
-    res.send(range);
+    try {
+        const limit = req.query.limit;
+        const offset = req.query.offset;
+        const range = await getAllPokemonInRange(limit, offset);
+        if (range == "undefined") {
+            res.status(500)
+            res.send("oops!")
+        } else {
+            res.send(range);
+        }
+    } catch(err) {
+        res.status(500);
+        res.send(err);
+        console.log(err)
+    }
 })
 
 router.get('/:name', async function(req, res, next) {
     try {
+        
         const pokemon = await getPokemon(req.params.name);
-        res.send(pokemon);
+        if (!pokemon) {
+            res.status(500)
+            res.send("oops!")
+        } else {
+            res.send(pokemon);
+        }
     } catch(err) {
         res.status(500);
         res.send(err);
+        console.log(err)
     }
     
 });
 
 router.get('/abilities/:name', async function(req, res, next) {
-    const abilities = await getPokemonAbilities(req.params.name);
-    res.send(abilities);
+    try {
+        const abilities = await getPokemonAbilities(req.params.name);
+        res.send(abilities);
+    } catch(err) {
+        res.status(500);
+        res.send(err);
+        console.log(err)
+    }
 })
 
 router.get('/types/:name', async function(req, res, next) {
-    const types = await getPokemonTypeInfo(req.params.name);
-    res.send(types);
+    try {
+        const types = await getPokemonTypeInfo(req.params.name);
+        res.send(types);
+    } catch(err) {
+        res.status(500);
+        res.send(err);
+        console.log(err)
+    } 
 })
 
 
