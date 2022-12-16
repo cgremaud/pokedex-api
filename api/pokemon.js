@@ -58,4 +58,9 @@ const getPokemonTypeInfo = async function(name) {
    }
 }
 
-export default pokemon;
+module.exports = {
+    getPokemon: getPokemon,
+    getAllPokemonInRange: getAllPokemonInRange,
+    getPokemonAbilities: getPokemonAbilities,
+    getPokemonTypeInfo: getPokemonTypeInfo
+}
