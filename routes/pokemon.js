@@ -16,33 +16,20 @@ router.get('/findall', async function(req, res, next) {
         const limit = req.query.limit;
         const offset = req.query.offset;
         const range = await getAllPokemonInRange(limit, offset);
-        if (range == "undefined") {
-            res.status(500)
-            res.send("oops!")
-        } else {
-            res.send(range);
-        }
+        res.send(range);
     } catch(err) {
         res.status(500);
         res.send(err);
-        console.log(err)
     }
 })
 
 router.get('/:name', async function(req, res, next) {
     try {
-        
         const pokemon = await getPokemon(req.params.name);
-        if (!pokemon) {
-            res.status(500)
-            res.send("oops!")
-        } else {
-            res.send(pokemon);
-        }
+        res.send(pokemon);
     } catch(err) {
         res.status(500);
         res.send(err);
-        console.log(err)
     }
     
 });
@@ -54,7 +41,6 @@ router.get('/abilities/:name', async function(req, res, next) {
     } catch(err) {
         res.status(500);
         res.send(err);
-        console.log(err)
     }
 })
 
@@ -65,7 +51,6 @@ router.get('/types/:name', async function(req, res, next) {
     } catch(err) {
         res.status(500);
         res.send(err);
-        console.log(err)
     } 
 })
 
