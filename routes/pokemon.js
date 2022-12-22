@@ -32,6 +32,7 @@ router.get('/:name', async function(req, res, next) {
         if (!pokemon) {
             throw new Error;
         }
+        pokemon.name = req.params.name;
         res.send(pokemon);
     } catch(err) {
         res.status(404); 
